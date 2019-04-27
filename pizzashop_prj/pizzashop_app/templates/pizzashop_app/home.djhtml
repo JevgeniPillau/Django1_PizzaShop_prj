@@ -1,0 +1,8 @@
+{% extends base.html %}
+{% load staticfiles %}
+{% block title %}
+<title>Pizzeria main page</title>
+{% endblock %}
+{% block content %}
+<h1>Hello pizza lovers and pizzamakers!</h1>
+{% endblock %}
