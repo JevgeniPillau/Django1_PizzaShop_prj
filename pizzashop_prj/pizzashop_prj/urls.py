@@ -15,10 +15,20 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-
 from pizzashop_app import views
+
+from django.contrib.auth.views import LoginView, LogoutView
+
+from django.conf.urls.static import static
+from django.conf import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.home, name='home'),
-]
+    path('pizzashop_app/sign_in/', LoginView.as_view(template_name='pizzashop_app/sign_in.html'), name='pizzashop_app-sign_in'),
+    path('pizzashop_app/sign_out/', LogoutView.as_view(next_page='/'), name='pizzashop_app-sign_out'),
+    path('pizzashop_app/', views.pizzashop_app_home, name='pizzashop_app-home'),
+    path('pizzashop_app/sign_up', views.pizzashop_app_sign_up, name='pizzashop_app_sign_up'),
+    path('pizzashop_app/account', views.pizzashop_app_account, name='pizzashop_app_account'),
+    path('pizzashop_app/pizza', views.pizzashop_app_pizza, name='pizzashop_app_pizza'),
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
